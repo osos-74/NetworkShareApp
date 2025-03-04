@@ -1,0 +1,6 @@
+D:\programming\NetworkShareApp\NetworkShareLib\obj\Debug\NetworkShareLib.csproj.AssemblyReference.cache
+D:\programming\NetworkShareApp\NetworkShareLib\obj\Debug\NetworkShareLib.csproj.CoreCompileInputs.cache
+D:\programming\NetworkShareApp\NetworkShareLib\bin\Debug\NetworkShareLib.dll
+D:\programming\NetworkShareApp\NetworkShareLib\bin\Debug\NetworkShareLib.pdb
+D:\programming\NetworkShareApp\NetworkShareLib\obj\Debug\NetworkShareLib.dll
+D:\programming\NetworkShareApp\NetworkShareLib\obj\Debug\NetworkShareLib.pdb

@@ -1,0 +1,10 @@
+D:\programming\NetworkShareApp\waitforit\bin\Debug\waitforit.exe.config
+D:\programming\NetworkShareApp\waitforit\bin\Debug\waitforit.exe
+D:\programming\NetworkShareApp\waitforit\bin\Debug\waitforit.pdb
+D:\programming\NetworkShareApp\waitforit\bin\Debug\NetworkShareLib.dll
+D:\programming\NetworkShareApp\waitforit\bin\Debug\NetworkShareLib.pdb
+D:\programming\NetworkShareApp\waitforit\obj\Debug\waitforit.csproj.AssemblyReference.cache
+D:\programming\NetworkShareApp\waitforit\obj\Debug\waitforit.csproj.CoreCompileInputs.cache
+D:\programming\NetworkShareApp\waitforit\obj\Debug\waitforit.csproj.Up2Date
+D:\programming\NetworkShareApp\waitforit\obj\Debug\waitforit.exe
+D:\programming\NetworkShareApp\waitforit\obj\Debug\waitforit.pdb

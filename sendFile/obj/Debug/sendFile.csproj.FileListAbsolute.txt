@@ -1,0 +1,10 @@
+D:\programming\NetworkShareApp\sendFile\obj\Debug\sendFile.csproj.AssemblyReference.cache
+D:\programming\NetworkShareApp\sendFile\obj\Debug\sendFile.csproj.CoreCompileInputs.cache
+D:\programming\NetworkShareApp\sendFile\bin\Debug\sendFile.exe.config
+D:\programming\NetworkShareApp\sendFile\bin\Debug\sendFile.exe
+D:\programming\NetworkShareApp\sendFile\bin\Debug\sendFile.pdb
+D:\programming\NetworkShareApp\sendFile\bin\Debug\NetworkShareLib.dll
+D:\programming\NetworkShareApp\sendFile\bin\Debug\NetworkShareLib.pdb
+D:\programming\NetworkShareApp\sendFile\obj\Debug\sendFile.csproj.Up2Date
+D:\programming\NetworkShareApp\sendFile\obj\Debug\sendFile.exe
+D:\programming\NetworkShareApp\sendFile\obj\Debug\sendFile.pdb
