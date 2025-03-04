@@ -1,0 +1,10 @@
+D:\programming\NetworkShareApp\sendit\bin\Debug\sendit.exe.config
+D:\programming\NetworkShareApp\sendit\bin\Debug\sendit.exe
+D:\programming\NetworkShareApp\sendit\bin\Debug\sendit.pdb
+D:\programming\NetworkShareApp\sendit\bin\Debug\NetworkShareLib.dll
+D:\programming\NetworkShareApp\sendit\bin\Debug\NetworkShareLib.pdb
+D:\programming\NetworkShareApp\sendit\obj\Debug\sendit.csproj.AssemblyReference.cache
+D:\programming\NetworkShareApp\sendit\obj\Debug\sendit.csproj.CoreCompileInputs.cache
+D:\programming\NetworkShareApp\sendit\obj\Debug\sendit.csproj.Up2Date
+D:\programming\NetworkShareApp\sendit\obj\Debug\sendit.exe
+D:\programming\NetworkShareApp\sendit\obj\Debug\sendit.pdb

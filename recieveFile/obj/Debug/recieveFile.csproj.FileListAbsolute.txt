@@ -1,0 +1,10 @@
+D:\programming\NetworkShareApp\recieveFile\bin\Debug\recieveFile.exe.config
+D:\programming\NetworkShareApp\recieveFile\bin\Debug\recieveFile.exe
+D:\programming\NetworkShareApp\recieveFile\bin\Debug\recieveFile.pdb
+D:\programming\NetworkShareApp\recieveFile\bin\Debug\NetworkShareLib.dll
+D:\programming\NetworkShareApp\recieveFile\bin\Debug\NetworkShareLib.pdb
+D:\programming\NetworkShareApp\recieveFile\obj\Debug\recieveFile.csproj.AssemblyReference.cache
+D:\programming\NetworkShareApp\recieveFile\obj\Debug\recieveFile.csproj.CoreCompileInputs.cache
+D:\programming\NetworkShareApp\recieveFile\obj\Debug\recieveF.1FDB66BB.Up2Date
+D:\programming\NetworkShareApp\recieveFile\obj\Debug\recieveFile.exe
+D:\programming\NetworkShareApp\recieveFile\obj\Debug\recieveFile.pdb
