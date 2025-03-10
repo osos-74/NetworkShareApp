@@ -28,6 +28,7 @@ namespace NetworkShareGUI
             _broadcaster.SayHello();
             _broadcaster.Listen();
             _broadcaster.MessageRecieved += Broadcaster_MessageRecieved;//publish subscribe
+                                                                        //it will get the payload as soon as a message: containing the message recieved and the endPoint of the sender
                                                                         // += :the method Broadcaster_MessageRecieved is subscriebed to the event MessageRecieved 
         }
 
@@ -37,7 +38,8 @@ namespace NetworkShareGUI
             switch(e.Message)
             {
                 case BroadcastMessage.Hello:
-                    //send Acknowldge message
+                    //in case of getting Hello MSG 
+                    //send Acknowledge to the sender of the hello msg
                     broadcaster.Acknowledge(e.Client);
                     break;
                 case BroadcastMessage.Acknowledge:
@@ -45,21 +47,13 @@ namespace NetworkShareGUI
                     lstNodes.Items.Add(e.Client);
                     break;
 
-                case BroadcastMessage.Confirm:
-                    //?????
+                case BroadcastMessage.Initiate:
+                    var reciever = new RecieveFile(54000);
+                    reciever.TransferComplete += FileRecieved_Complete;
+                    reciever.Listen();  
                     break;
                     
             }
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-
         }
 
         private void mmuSendFile_Click(object sender, EventArgs e)
@@ -75,6 +69,9 @@ namespace NetworkShareGUI
                 {
                     var client = lstNodes.SelectedItem as IPEndPoint;
                     var hostname = client.Address.ToString();
+                    
+                    _broadcaster.InitiatingTransfer(client);
+
                     var transfer = new TransferFile(ofd.FileName, hostname);
                     transfer.TransferComplete += Transfer_Complete;
                     transfer.Start();
@@ -82,6 +79,14 @@ namespace NetworkShareGUI
 
                 }
             }
+
+        }
+
+        private void FileRecieved_Complete(object sender, EventArgs e)
+        {
+            var reciveFile = sender as RecieveFile;
+            reciveFile.Stop();
+            MessageBox.Show("Transfer Complete!");
 
         }
         private void Transfer_Complete(object sender, EventArgs e)

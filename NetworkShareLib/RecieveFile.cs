@@ -44,6 +44,11 @@ namespace NetworkShareLib
 
         }
 
+        public void Stop()
+        {
+            _listener.Stop();
+            _listener = null;
+        }
 
         [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
         private void Client_Connected(IAsyncResult result)
