@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,7 +18,10 @@ namespace NetworkShareLib
         private byte[] _buffer = new byte[65536];
         private long _length;
         private string _filename;
-        private  TcpListener _listener;
+        private TcpListener _listener;
+
+        public EventHandler TransferComplete;
+
         private readonly int _port;
 
         public RecieveFile(int port) 
@@ -31,27 +35,42 @@ namespace NetworkShareLib
             //endpoint IP and port number to listen on
             var endpoint = new IPEndPoint(IPAddress.Any, _port);
             _listener = new TcpListener(endpoint);
-            //start Listening for incoming connection requests
-            //start queue the incoming connection requests
+            //start() Listening for incoming connection requests
+            //start() queue the incoming connection requests
             _listener.Start();
             //Accepting the incoming requests
             _listener.BeginAcceptTcpClient(Client_Connected, _listener);
+         //   _listener.AcceptTcpClient();
 
         }
 
+
+        [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
         private void Client_Connected(IAsyncResult result)
-        {
-            if (result.IsCompleted)
-            {
-                var listener = result.AsyncState as TcpListener;
-                var client = listener.EndAcceptTcpClient(result);
-                //intiate MemoryStream
-                _ms = new MemoryStream();
-                //read data from incoming network stream and store it into buffer
-                client.GetStream().BeginRead(_buffer,0,_buffer.Length,Client_Recieved,client);
+           {
 
-            }
-        }
+               if (result.IsCompleted)
+               {
+                var listener = _listener;
+                listener = result.AsyncState as TcpListener;
+                if (listener == null)
+                {
+                    Console.WriteLine("Listener is null!");
+                    return;
+                }
+                
+                  var client = listener.EndAcceptTcpClient(result);
+                   //intiate MemoryStream
+                   _ms = new MemoryStream();
+                   //read data from incoming network stream and store it into buffer
+
+                   client.GetStream().BeginRead(_buffer,0,_buffer.Length,Client_Recieved,client);
+
+
+               }
+           }
+
+
 
         private void Client_Recieved(IAsyncResult result)
         {
@@ -72,18 +91,17 @@ namespace NetworkShareLib
                         var raw = Encoding.ASCII.GetString(_buffer, 0, headerSize);
                         //split on \r\n {filename -> newline -> fileLength->newline}
                         var split = raw.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                        _filename = split[0];
+                        var versionHeader = split[0]; // TODO: check version #
+                        _filename = split[1];
                         //Data (without Header)
-                        _length = long.Parse(split[1]);
-
-
+                        _length = long.Parse(split[2]);
 
                     }
                     
                     _processedHeader = true;
                     var lengthOfData = bytesRecieved - headerSize;
                     //write data into the MemoryStream from the buffer
-                    _ms.Write(_buffer, headerSize + 1, lengthOfData);
+                    _ms.Write(_buffer, headerSize , lengthOfData);
                 }
 
                 //if memorystream data < length of recieved data
@@ -103,7 +121,9 @@ namespace NetworkShareLib
                 {
                     client.Close();
                     File.WriteAllBytes(_filename,_ms.ToArray());
+                    _ms.Dispose();
                     _ms=null;
+                    TransferComplete?.Invoke(this,EventArgs.Empty);
                 }
 
             }
@@ -119,7 +139,7 @@ namespace NetworkShareLib
             //end header
             //DATA
 
-            var pos = -1;
+            var length = -1;
             //search for "\r\n\r\n" :indication of Header End
             for (int i = 0; i < buffer.Length-4; i++)
             {
@@ -128,16 +148,16 @@ namespace NetworkShareLib
                 char c3 = (char)buffer[i+2];
                 char c4 = (char)buffer[i+3];
 
-                if(c1 == '\r'&&c2=='n'&&c3 == '\r' && c4== 'n') 
+                if(c1 == '\r' &&c2 == '\n' && c3 == '\r' && c4 == '\n') 
                 {
                     // boundry of = header
-                    pos = i+3; 
+                    length = i+4; 
                     break;   
                 }
             }
 
           //return header Boundry
-            return pos;
+            return length;
         }
 
     }

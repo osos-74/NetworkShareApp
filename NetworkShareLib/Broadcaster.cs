@@ -3,6 +3,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Configuration;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -27,18 +28,30 @@ namespace NetworkShareLib
             
         }
        
-        public void SayHello(int port)
+        public void SayHello()
         {
-            var helloString = Encoding.ASCII.GetBytes(HEL);
-            _client.Send(helloString,
-                    helloString.Length,
-                    new IPEndPoint(IPAddress.Broadcast, port));
+           // using (var sender = new UdpClient())
+            //{
+                 var helloString = Encoding.ASCII.GetBytes(HEL);
+               _client.Send(helloString,
+                       helloString.Length,
+                       new IPEndPoint(IPAddress.Broadcast, _port));
+
+
+            //}
         }
         public void Listen()
         {
             //client Listen on port 54000
             _client.BeginReceive(Client_MessageRecieved, _client);
         }
+
+        public void Acknowledge(IPEndPoint client)
+        {
+            _client.Send(Encoding.ASCII.GetBytes(ACK),ACK.Length,client);
+
+        }
+
         private void Client_MessageRecieved(IAsyncResult result)
         {
 
@@ -46,7 +59,7 @@ namespace NetworkShareLib
             {
                 var sender = new IPEndPoint(IPAddress.Any, 0);
                 var client = result.AsyncState as UdpClient;
-                var recieved = client.EndReceive(result, ref sender);
+                var recieved = client.EndReceive(result, ref sender);//sender: takes the Endpoint of the client who sent this packet
                 if (recieved.Length > 0)
                 {
                     var msg = Encoding.ASCII.GetString(recieved);
@@ -63,8 +76,9 @@ namespace NetworkShareLib
                             break;
                     }
                 }
-           
-                
+                _client.BeginReceive(Client_MessageRecieved, _client);
+
+
             }
         }
         private void OnMessageRecieved(BroadcastMessage message, IPEndPoint client)

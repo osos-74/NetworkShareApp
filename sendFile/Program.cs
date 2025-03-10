@@ -15,7 +15,9 @@ namespace sendFile
             var file = args[1];
 
             var transferFile = new TransferFile(file, hostname); 
-            transferFile.Start();   
+            transferFile.Start();
+           Console.WriteLine("press any key");
+            Console.ReadLine();
 
         }
     }

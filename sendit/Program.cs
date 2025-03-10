@@ -9,7 +9,13 @@ namespace sendit
         static void Main(string[] args)
         {
             var Broadcaster  = new Broadcaster(54000);//54001
-            Broadcaster.SayHello(54000);
+            while (true)
+            {
+
+                //Broadcaster.SayHello(54000);
+          
+                Thread.Sleep(1000);
+            }
 
         }
     }

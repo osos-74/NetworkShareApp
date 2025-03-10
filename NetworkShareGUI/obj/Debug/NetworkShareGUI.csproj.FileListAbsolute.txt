@@ -1,0 +1,13 @@
+D:\programming\NetworkShareApp\NetworkShareGUI\bin\Debug\NetworkShareGUI.exe.config
+D:\programming\NetworkShareApp\NetworkShareGUI\bin\Debug\NetworkShareGUI.exe
+D:\programming\NetworkShareApp\NetworkShareGUI\bin\Debug\NetworkShareGUI.pdb
+D:\programming\NetworkShareApp\NetworkShareGUI\obj\Debug\NetworkShareGUI.csproj.AssemblyReference.cache
+D:\programming\NetworkShareApp\NetworkShareGUI\obj\Debug\NetworkShareGUI.MainForm.resources
+D:\programming\NetworkShareApp\NetworkShareGUI\obj\Debug\NetworkShareGUI.Properties.Resources.resources
+D:\programming\NetworkShareApp\NetworkShareGUI\obj\Debug\NetworkShareGUI.csproj.GenerateResource.cache
+D:\programming\NetworkShareApp\NetworkShareGUI\obj\Debug\NetworkShareGUI.csproj.CoreCompileInputs.cache
+D:\programming\NetworkShareApp\NetworkShareGUI\obj\Debug\NetworkShareGUI.exe
+D:\programming\NetworkShareApp\NetworkShareGUI\obj\Debug\NetworkShareGUI.pdb
+D:\programming\NetworkShareApp\NetworkShareGUI\bin\Debug\NetworkShareLib.dll
+D:\programming\NetworkShareApp\NetworkShareGUI\bin\Debug\NetworkShareLib.pdb
+D:\programming\NetworkShareApp\NetworkShareGUI\obj\Debug\NetworkS.A9BEEFC6.Up2Date

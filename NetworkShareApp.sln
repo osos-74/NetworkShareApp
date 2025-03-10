@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recieveFile", "recieveFile\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sendFile", "sendFile\sendFile.csproj", "{23754A3E-CF87-4D49-BFCD-D9D16A82625D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkShareGUI", "NetworkShareGUI\NetworkShareGUI.csproj", "{22A26261-345B-4CE3-A379-79B85D6E5762}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{23754A3E-CF87-4D49-BFCD-D9D16A82625D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23754A3E-CF87-4D49-BFCD-D9D16A82625D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23754A3E-CF87-4D49-BFCD-D9D16A82625D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22A26261-345B-4CE3-A379-79B85D6E5762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22A26261-345B-4CE3-A379-79B85D6E5762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22A26261-345B-4CE3-A379-79B85D6E5762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22A26261-345B-4CE3-A379-79B85D6E5762}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
