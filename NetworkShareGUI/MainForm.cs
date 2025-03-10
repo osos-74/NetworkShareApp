@@ -81,6 +81,15 @@ namespace NetworkShareGUI
             }
 
         }
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Handle the selection change here
+        }
+
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Your logic for handling the context menu opening
+        }
 
         private void FileRecieved_Complete(object sender, EventArgs e)
         {
