@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,8 +15,8 @@ namespace NetworkShareGUI
 {
     public partial class MainForm : Form
     {
+        private Broadcaster _broadcaster;
 
-        private Broadcaster _broadcaster ;
         public MainForm()
         {
             InitializeComponent();
@@ -27,36 +28,67 @@ namespace NetworkShareGUI
             _broadcaster = new Broadcaster();
             _broadcaster.SayHello();
             _broadcaster.Listen();
-            _broadcaster.MessageRecieved += Broadcaster_MessageRecieved;//publish subscribe
-                                                                        //it will get the payload as soon as a message: containing the message recieved and the endPoint of the sender
-                                                                        // += :the method Broadcaster_MessageRecieved is subscriebed to the event MessageRecieved 
+            _broadcaster.MessageRecieved += Broadcaster_MessageReceived;
         }
 
-        private void Broadcaster_MessageRecieved(object sender, BroadcastPayload e)
+        private void AddToClientList(IPEndPoint client)
         {
-            var broadcaster = sender as Broadcaster;
-            switch(e.Message)
+            if (!lstNodes.Items.Contains(client))
             {
-                case BroadcastMessage.Hello:
-                    //in case of getting Hello MSG 
-                    //send Acknowledge to the sender of the hello msg
-                    broadcaster.Acknowledge(e.Client);
-                    break;
-                case BroadcastMessage.Acknowledge:
-                    //add client to list
-                    lstNodes.Items.Add(e.Client);
-                    break;
-
-                case BroadcastMessage.Initiate:
-                    var reciever = new RecieveFile(54000);
-                    reciever.TransferComplete += FileRecieved_Complete;
-                    reciever.Listen();  
-                    break;
-                    
+                lstNodes.Items.Add(client);
             }
         }
 
-        private void mmuSendFile_Click(object sender, EventArgs e)
+        private void Broadcaster_MessageReceived(object sender, BroadcastPayload e)
+        {
+            var broadcaster = sender as Broadcaster;
+
+            switch (e.Message)
+            {
+                case BroadcastMessage.Hello:
+                    // Send Acknowldge message
+                    broadcaster.Acknowledge(e.Client);
+                    CheckAndAdd(e.Client);
+                    break;
+                case BroadcastMessage.Acknowledge:
+                    // Add client to list
+                    CheckAndAdd(e.Client);
+                    break;
+                case BroadcastMessage.Initiate:
+                    var receiver = new RecieveFile(54000);
+                    receiver.TransferComplete += FileReceived_Complete;
+                    receiver.Listen();
+                    break;
+            }
+        }
+
+        private void CheckAndAdd(IPEndPoint client)
+        {
+            var infs = NetworkInterface.GetAllNetworkInterfaces();
+            bool found = false;
+            foreach (var i in infs)
+            {
+                var addrs = i.GetIPProperties();
+                foreach (var ip in addrs.UnicastAddresses)
+                {
+                    if (ip.Address.Equals(client.Address))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found)
+                    break;
+            }
+
+            if (!found)
+            {
+                Invoke((Action)(() => AddToClientList(client)));
+            }
+        }
+
+   private void mmuSendFile_Click(object sender, EventArgs e)
         {
             if(lstNodes.SelectedItem==null) 
             {
@@ -90,18 +122,16 @@ namespace NetworkShareGUI
         {
             // Your logic for handling the context menu opening
         }
-
-        private void FileRecieved_Complete(object sender, EventArgs e)
+        private void FileReceived_Complete(object sender, EventArgs e)
         {
-            var reciveFile = sender as RecieveFile;
-            reciveFile.Stop();
-            MessageBox.Show("Transfer Complete!");
-
+            var receiveFile = sender as RecieveFile;
+            receiveFile.Stop();
+            MessageBox.Show("Transfer complete!");
         }
+
         private void Transfer_Complete(object sender, EventArgs e)
         {
-            MessageBox.Show("Transfer Complete!");
+            MessageBox.Show("Transfer complete!");
         }
     }
-
 }

@@ -7,7 +7,7 @@
       "RelativeMoniker": "D:0:0:{22A26261-345B-4CE3-A379-79B85D6E5762}|NetworkShareGUI\\NetworkShareGUI.csproj|solutionrelative:networksharegui\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22A26261-345B-4CE3-A379-79B85D6E5762}|NetworkShareGUI\\NetworkShareGUI.csproj|d:\\programming\\networkshareapp\\networksharegui\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{22A26261-345B-4CE3-A379-79B85D6E5762}|NetworkShareGUI\\NetworkShareGUI.csproj|D:\\programming\\NetworkShareApp\\networksharegui\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22A26261-345B-4CE3-A379-79B85D6E5762}|NetworkShareGUI\\NetworkShareGUI.csproj|solutionrelative:networksharegui\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -15,12 +15,12 @@
       "RelativeMoniker": "D:0:0:{22A26261-345B-4CE3-A379-79B85D6E5762}|NetworkShareGUI\\NetworkShareGUI.csproj|solutionrelative:networksharegui\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4872CBD8-DB73-4032-85C4-B13488A2DB00}|NetworkShareLib\\NetworkShareLib.csproj|D:\\programming\\NetworkShareApp\\networksharelib\\recievefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4872CBD8-DB73-4032-85C4-B13488A2DB00}|NetworkShareLib\\NetworkShareLib.csproj|solutionrelative:networksharelib\\recievefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4872CBD8-DB73-4032-85C4-B13488A2DB00}|NetworkShareLib\\NetworkShareLib.csproj|D:\\programming\\NetworkShareApp\\networksharelib\\broadcaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4872CBD8-DB73-4032-85C4-B13488A2DB00}|NetworkShareLib\\NetworkShareLib.csproj|solutionrelative:networksharelib\\broadcaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4872CBD8-DB73-4032-85C4-B13488A2DB00}|NetworkShareLib\\NetworkShareLib.csproj|D:\\programming\\NetworkShareApp\\networksharelib\\recievefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4872CBD8-DB73-4032-85C4-B13488A2DB00}|NetworkShareLib\\NetworkShareLib.csproj|solutionrelative:networksharelib\\recievefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4872CBD8-DB73-4032-85C4-B13488A2DB00}|NetworkShareLib\\NetworkShareLib.csproj|D:\\programming\\NetworkShareApp\\networksharelib\\transferfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -60,7 +60,7 @@
               "RelativeDocumentMoniker": "NetworkShareGUI\\MainForm.Designer.cs",
               "ToolTip": "D:\\programming\\NetworkShareApp\\NetworkShareGUI\\MainForm.Designer.cs",
               "RelativeToolTip": "NetworkShareGUI\\MainForm.Designer.cs",
-              "ViewState": "AQIAACYAAAAAAAAAAAAvwDYAAABdAAAA",
+              "ViewState": "AQIAACsAAAAAAAAAAAAQwD0AAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-10T21:18:40.034Z",
               "EditorCaption": ""
@@ -139,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "RecieveFile.cs",
               "DocumentMoniker": "D:\\programming\\NetworkShareApp\\NetworkShareLib\\RecieveFile.cs",
               "RelativeDocumentMoniker": "NetworkShareLib\\RecieveFile.cs",
@@ -151,15 +151,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Broadcaster.cs",
               "DocumentMoniker": "D:\\programming\\NetworkShareApp\\NetworkShareLib\\Broadcaster.cs",
               "RelativeDocumentMoniker": "NetworkShareLib\\Broadcaster.cs",
               "ToolTip": "D:\\programming\\NetworkShareApp\\NetworkShareLib\\Broadcaster.cs",
               "RelativeToolTip": "NetworkShareLib\\Broadcaster.cs",
-              "ViewState": "AQIAAEUAAAAAAAAAAAAMwDcAAAAmAAAA",
+              "ViewState": "AQIAAFcAAAAAAAAAAAAAAGEAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-08T23:40:08.756Z"
+              "WhenOpened": "2025-03-08T23:40:08.756Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -169,7 +170,7 @@
               "RelativeDocumentMoniker": "NetworkShareGUI\\MainForm.cs",
               "ToolTip": "D:\\programming\\NetworkShareApp\\NetworkShareGUI\\MainForm.cs",
               "RelativeToolTip": "NetworkShareGUI\\MainForm.cs",
-              "ViewState": "AQIAAD4AAAAAAAAAAAAAAE8AAAARAAAA",
+              "ViewState": "AQIAAHMAAAAAAAAAAAAvwIMAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-08T19:27:41.411Z",
               "EditorCaption": ""
