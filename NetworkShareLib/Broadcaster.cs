@@ -35,7 +35,7 @@ namespace NetworkShareLib
                  var helloString = Encoding.ASCII.GetBytes(HEL);
                _client.Send(helloString,
                        helloString.Length,
-                       new IPEndPoint(IPAddress.Parse("192.168.1.255"), _port));
+                       new IPEndPoint(IPAddress.Broadcast, _port));
 
 
             //}
@@ -55,7 +55,7 @@ namespace NetworkShareLib
         }   
         public void InitiatingTransfer(IPEndPoint client)
         {
-            _client.Send(Encoding.ASCII.GetBytes(ACK),ACK.Length,client);
+            _client.Send(Encoding.ASCII.GetBytes(INI),INI.Length,client);
 
         }
         //summary:
@@ -67,11 +67,14 @@ namespace NetworkShareLib
 
             if (result.IsCompleted)
             {
+                
                 var sender = new IPEndPoint(IPAddress.Any, 0);
                 var client = result.AsyncState as UdpClient;
                 var recieved = client.EndReceive(result, ref sender);//sender: takes the Endpoint of the client who sent this packet
+                Console.WriteLine(sender.Address);
+              
 
-               _client.BeginReceive(Client_MessageRecieved, _client);//ensuring that the client will listen before the message is sent 
+                _client.BeginReceive(Client_MessageRecieved, _client);//ensuring that the client will listen before the message is sent 
                 if (recieved.Length > 0)
                 {
                     var msg = Encoding.ASCII.GetString(recieved);
@@ -79,12 +82,14 @@ namespace NetworkShareLib
                     {
                         case INI:
                             OnMessageRecieved(BroadcastMessage.Initiate,sender);//invokes the MessageRecieve Event inside of it
+
                             break;
                         case ACK:
                             OnMessageRecieved(BroadcastMessage.Acknowledge, sender);//invokes the MessageRecieve Event inside of it
                             break;
                         default:
                             OnMessageRecieved(BroadcastMessage.Hello, sender);//invokes the MessageRecieve Event inside of it
+                         
                             break;
                     }
                 }
