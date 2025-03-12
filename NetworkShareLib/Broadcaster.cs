@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Configuration;
@@ -16,6 +17,8 @@ namespace NetworkShareLib
         public const string HEL = nameof(HEL);
         public const string INI = nameof(INI);
         public const string ACK = nameof(ACK);
+        public const string SND = nameof(SND);
+        public const string SOK = nameof(SOK);
         private readonly UdpClient _client;
         private readonly int _port;
 
@@ -52,7 +55,9 @@ namespace NetworkShareLib
         {
             _client.Send(Encoding.ASCII.GetBytes(ACK),ACK.Length,client);
 
-        }   
+        }
+
+      
         public void InitiatingTransfer(IPEndPoint client)
         {
             _client.Send(Encoding.ASCII.GetBytes(INI),INI.Length,client);
@@ -61,6 +66,19 @@ namespace NetworkShareLib
         //summary:
         //takes an Endpoint to which you send a message
 
+        public void SendFileRequest(IPEndPoint client,string hostAndUser,string filename)
+        {
+            string trimmedFilename = Path.GetFileName(filename);
+
+            string msg = $"{SND}\r\n{hostAndUser}\r\n{trimmedFilename}";
+            _client.Send(Encoding.ASCII.GetBytes(msg), msg.Length, client);
+
+        }
+        public void SendFileAcknowledge(IPEndPoint client,string filename)
+        {
+            string msg = $"{SOK}\r\n{filename}";
+            _client.Send(Encoding.ASCII.GetBytes(msg), msg.Length, client);
+        }
 
         private void Client_MessageRecieved(IAsyncResult result)
         {
@@ -78,30 +96,39 @@ namespace NetworkShareLib
                 if (recieved.Length > 0)
                 {
                     var msg = Encoding.ASCII.GetString(recieved);
-                    switch (msg)
+                    var msgSplit = msg.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    switch (msgSplit[0])
                     {
                         case INI:
                             OnMessageRecieved(BroadcastMessage.Initiate,sender);//invokes the MessageRecieve Event inside of it
 
-                            break;
+                            break;                        
                         case ACK:
-                            OnMessageRecieved(BroadcastMessage.Acknowledge, sender);//invokes the MessageRecieve Event inside of it
+                            OnMessageRecieved(BroadcastMessage.HelloAcknowledge, sender);//invokes the MessageRecieve Event inside of it
+                            break;
+                        case SND:
+                            OnMessageRecieved(BroadcastMessage.SendRequest, sender, msgSplit[1], msgSplit[2]);//invokes the MessageRecieve Event inside of 
+                            break;
+                        case SOK:
+                            OnMessageRecieved(BroadcastMessage.SendRequest, sender,"", msgSplit[1]);//invokes the MessageRecieve Event inside of 
                             break;
                         default:
-                            OnMessageRecieved(BroadcastMessage.Hello, sender);//invokes the MessageRecieve Event inside of it
-                         
+                            OnMessageRecieved(BroadcastMessage.Hello, sender);//invokes the MessageRecieve Event inside of 
                             break;
                     }
                 }
 
             }
         }
-        private void OnMessageRecieved(BroadcastMessage message, IPEndPoint client)
+        private void OnMessageRecieved(BroadcastMessage message,
+                                        IPEndPoint client,
+                                        string hostname="",
+                                        string filename="")
         {
             //if the MessageRecieved has any subscriber they will get invoked and the payload will be passed to them
             //tells the subscribers the kind of message the client recieved and the name of the sender
             MessageRecieved?.Invoke(this,
-                                    new BroadcastPayload(message, client));
+                                    new BroadcastPayload(message, client,hostname,filename));
         }
     }
 }

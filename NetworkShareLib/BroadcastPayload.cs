@@ -12,11 +12,19 @@ namespace NetworkShareLib
         public BroadcastMessage Message { get;}
 
         public IPEndPoint Client { get; }
-        
-        public BroadcastPayload(BroadcastMessage message , IPEndPoint client)
+        public string Hostname { get; set; }
+        public string Filename { get; set; }
+
+        public BroadcastPayload(BroadcastMessage message , IPEndPoint client,string hostname,string filename)
         {
             Message = message;
             Client = client;
+            Hostname = hostname;
+            Filename = filename;
+
+
+
+
            
         }
     }

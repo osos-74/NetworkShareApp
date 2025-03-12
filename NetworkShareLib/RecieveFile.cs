@@ -22,6 +22,7 @@ namespace NetworkShareLib
 
         public EventHandler TransferComplete;
 
+
         private readonly int _port;
 
         public RecieveFile(int port) 
@@ -39,6 +40,7 @@ namespace NetworkShareLib
             //start() queue the incoming connection requests
             _listener.Start();
             //Accepting the incoming requests
+            
             _listener.BeginAcceptTcpClient(Client_Connected, _listener);
          //   _listener.AcceptTcpClient();
 
@@ -132,6 +134,10 @@ namespace NetworkShareLib
                 }
 
             }
+        }
+        private void Accept_Transfer()
+        { 
+            
         }
 
         private int GetHeaderSize(byte[] buffer)
