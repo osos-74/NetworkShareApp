@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,9 @@ namespace NetworkShareGUI
 {
     public partial class MainForm : Form
     {
+        public EventHandler AcceptTransfer;
+
+        private string _fileToTransfer = "";
         private Broadcaster _broadcaster;
 
         public MainForm()
@@ -50,7 +54,7 @@ namespace NetworkShareGUI
                     broadcaster.Acknowledge(e.Client);
                     CheckAndAdd(e.Client);
                     break;
-                case BroadcastMessage.Acknowledge:
+                case BroadcastMessage.HelloAcknowledge:
                     // Add client to list
                     CheckAndAdd(e.Client);
                     break;
@@ -59,6 +63,20 @@ namespace NetworkShareGUI
                     receiver.TransferComplete += FileReceived_Complete;
                     receiver.Listen();
                     break;
+                case BroadcastMessage.SendRequest:
+                    if(MessageBox.Show($"{e.Filename} from {e.Hostname}","Recieve File?",MessageBoxButtons.YesNo)==DialogResult.Yes)
+                    {
+                        broadcaster.SendFileAcknowledge(e.Client, e.Filename);
+                    }
+                    break;
+                case BroadcastMessage.SendAcknowledge:
+                    _broadcaster.InitiatingTransfer(e.Client);
+                    var transfer = new TransferFile(_fileToTransfer,e.Client.Address.ToString());
+                    transfer.TransferComplete += Transfer_Complete;
+                    transfer.Start();
+                    break;
+
+                    
             }
         }
 
@@ -90,29 +108,32 @@ namespace NetworkShareGUI
 
    private void mmuSendFile_Click(object sender, EventArgs e)
         {
-            if(lstNodes.SelectedItem==null) 
+            if (lstNodes.SelectedItem == null)
             {
                 MessageBox.Show("Please select an item");
             }
             else
             {
+
+
                 var ofd = new OpenFileDialog();
-                if(ofd.ShowDialog() == DialogResult.OK) 
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     var client = lstNodes.SelectedItem as IPEndPoint;
-                    var hostname = client.Address.ToString();
-                    
-                    _broadcaster.InitiatingTransfer(client);
+                    //var hostname = client.Address.ToString();
+                    //_broadcaster.InitiatingTransfer(client);
+                    _fileToTransfer = ofd.FileName;
+                    var hostName = $"{Environment.UserName}@{Environment.MachineName}";
+                    _broadcaster.SendFileRequest(client, hostName, _fileToTransfer);
 
-                    var transfer = new TransferFile(ofd.FileName, hostname);
-                    transfer.TransferComplete += Transfer_Complete;
-                    transfer.Start();
-
-
+                    //var transfer = new TransferFile(ofd.FileName, hostname);
+                    //transfer.TransferComplete += Tranfer_Complete;
+                    //transfer.Start();
                 }
             }
 
-        }
+            }
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Handle the selection change here

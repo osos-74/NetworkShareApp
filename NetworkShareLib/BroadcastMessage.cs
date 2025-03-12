@@ -6,6 +6,8 @@ namespace NetworkShareLib
     {
         Hello,
         Initiate,
-        Acknowledge 
+        HelloAcknowledge,
+        SendRequest,
+        SendAcknowledge,
     }
 }

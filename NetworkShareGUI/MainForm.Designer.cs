@@ -57,7 +57,7 @@
             // mmuSendFile
             // 
             this.mmuSendFile.Name = "mmuSendFile";
-            this.mmuSendFile.Size = new System.Drawing.Size(180, 22);
+            this.mmuSendFile.Size = new System.Drawing.Size(121, 22);
             this.mmuSendFile.Text = "Send File";
             this.mmuSendFile.Click += new System.EventHandler(this.mmuSendFile_Click);
             // 
