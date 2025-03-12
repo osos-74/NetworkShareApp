@@ -110,7 +110,7 @@ namespace NetworkShareLib
                             OnMessageRecieved(BroadcastMessage.SendRequest, sender, msgSplit[1], msgSplit[2]);//invokes the MessageRecieve Event inside of 
                             break;
                         case SOK:
-                            OnMessageRecieved(BroadcastMessage.SendRequest, sender,"", msgSplit[1]);//invokes the MessageRecieve Event inside of 
+                            OnMessageRecieved(BroadcastMessage.SendAcknowledge, sender,"", msgSplit[1]);//invokes the MessageRecieve Event inside of 
                             break;
                         default:
                             OnMessageRecieved(BroadcastMessage.Hello, sender);//invokes the MessageRecieve Event inside of 
