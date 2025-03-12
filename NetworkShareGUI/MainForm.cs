@@ -55,7 +55,7 @@ namespace NetworkShareGUI
                     CheckAndAdd(e.Client);
                     break;
                 case BroadcastMessage.HelloAcknowledge:
-                    // Add client to list
+                    // Add client to lis t
                     CheckAndAdd(e.Client);
                     break;
                 case BroadcastMessage.Initiate:
